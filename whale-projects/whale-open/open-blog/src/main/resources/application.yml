@@ -3,4 +3,4 @@ server:
 
 spring:
   application:
-    name: yousee-clouds-video
+    name: open-blog

@@ -12,7 +12,7 @@
     <artifactId>whale-open</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>api-blog</module>
+        <module>open-blog</module>
     </modules>
 
 
