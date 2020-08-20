@@ -1,0 +1,6 @@
+server:
+  port: 3154
+
+spring:
+  application:
+    name: yousee-clouds-video
