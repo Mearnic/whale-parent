@@ -9,5 +9,5 @@ services:
     ports:
       - "3154:3154"
     volumes:
-      - /Volumes/System/docker/whale/open-blog/mnt/logs:/mnt/logs
+      - ~/system/docker/whale/open-blog/mnt/logs:/mnt/logs
     container_name: open-blog
