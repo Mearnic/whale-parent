@@ -1,0 +1,13 @@
+version: '2'
+services:
+  open-blog:
+    build: .
+#    image: registry.hub.docker.com/mearnic/open-blog:1.0-SNAPSHOT
+    environment:
+      - server.port=3154
+      - JAVA_OPTS='-Xmx64m -Xms64m'
+    ports:
+      - "3154:3154"
+    volumes:
+      - /Volumes/System/docker/whale/open-blog/mnt/logs:/mnt/logs
+    container_name: open-blog
