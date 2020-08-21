@@ -17,10 +17,14 @@
             <artifactId>whale-cloud-client</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
-            <groupId>com.mearnic.whale.projects</groupId>
-            <artifactId>business-user</artifactId>
-            <version>${revision}</version>
-        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

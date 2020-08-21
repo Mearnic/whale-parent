@@ -3,24 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>whale-parent</artifactId>
-        <groupId>com.mearnic.whale.parent</groupId>
+        <artifactId>whale-cloud</artifactId>
+        <groupId>com.mearnic.whale.cloud</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mearnic.whale.projects</groupId>
-    <artifactId>whale-projects</artifactId>
+    <artifactId>whale-cloud-control</artifactId>
     <packaging>pom</packaging>
-    <version>${revision}</version>
-    <modules>
-        <module>whale-org</module>
-        <module>whale-open</module>
-        <module>whale-public</module>
-    </modules>
 
+    <modules>
+        <module>whale-cloud-eureka</module>
+    </modules>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -57,5 +57,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

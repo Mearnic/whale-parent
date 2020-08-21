@@ -3,24 +3,28 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>whale-cloud</artifactId>
+        <artifactId>whale-cloud-dependency</artifactId>
         <groupId>com.mearnic.whale.cloud</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>whale-cloud-starter</artifactId>
+    <artifactId>whale-cloud-server</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.mearnic.whale.cloud</groupId>
-            <artifactId>whale-cloud-client</artifactId>
-            <version>${revision}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>com.mearnic.whale.cloud</groupId>
-            <artifactId>whale-cloud-server</artifactId>
-            <version>${revision}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
     </dependencies>
 

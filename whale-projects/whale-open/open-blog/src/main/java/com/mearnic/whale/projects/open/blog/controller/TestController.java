@@ -1,6 +1,5 @@
 package com.mearnic.whale.projects.open.blog.controller;
 
-import com.mearnic.whale.projects.business.user.entity.User;
 import com.mearnic.whale.projects.open.blog.service.BlogService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ public class TestController {
     @Resource
     private BlogService userService;
     @GetMapping(value = "/getUser")
-    public User queryUserList() {
+    public String queryUserList() {
         return userService.test();
     }
 }

@@ -3,18 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>whale-cloud</artifactId>
+        <artifactId>whale-cloud-dependency</artifactId>
         <groupId>com.mearnic.whale.cloud</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>whale-cloud-client</artifactId>
+    <artifactId>whale-cloud-starter</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>com.mearnic.whale.cloud</groupId>
+            <artifactId>whale-cloud-client</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mearnic.whale.cloud</groupId>
+            <artifactId>whale-cloud-server</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 

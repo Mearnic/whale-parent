@@ -12,12 +12,10 @@
     <groupId>com.mearnic.whale.cloud</groupId>
     <artifactId>whale-cloud</artifactId>
     <packaging>pom</packaging>
-    <version>${revision}</version>
+
     <modules>
-        <module>whale-cloud-client</module>
-        <module>whale-cloud-server</module>
-        <module>whale-cloud-starter</module>
-        <module>whale-cloud-eureka</module>
+        <module>whale-cloud-dependency</module>
+        <module>whale-cloud-control</module>
     </modules>
     <dependencies>
         <dependency>
@@ -25,48 +23,4 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.33.0</version>
-                <configuration>
-                    <!--第一步开启的docker远程服务-->
-                    <dockerHost>unix:///var/run/docker.sock</dockerHost>
-                    <verbose>true</verbose>
-                    <registry>registry.hub.docker.com</registry>
-                    <images>
-                        <image>
-                            <name>${project.name}</name>
-                            <!--别名:用于容器命名和在docker-compose.yml文件只能找到对应名字的配置-->
-                            <alias>${project.name}</alias>
-                            <!--镜像build相关配置-->
-                            <build>
-                                <!--使用dockerFile文件-->
-                                <dockerFile>${project.basedir}/${project.name}</dockerFile>
-                            </build>
-                            <!--配置docker-compose文件-->
-                            <external>
-                                <type>compose</type>
-                                <basedir>${project.basedir}</basedir>
-                                <composeFile>docker-compose.yml</composeFile>
-                            </external>
-                            <!--容器run相关配置-->
-                            <run>
-                                <!--配置运行时容器命名策略为:别名,如果不指定则默认为none,即使用随机分配名称-->
-                                <namingStrategy>alias</namingStrategy>
-                            </run>
-                        </image>
-                    </images>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

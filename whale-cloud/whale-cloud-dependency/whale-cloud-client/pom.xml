@@ -3,17 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>whale-projects</artifactId>
-        <groupId>com.mearnic.whale.projects</groupId>
+        <artifactId>whale-cloud-dependency</artifactId>
+        <groupId>com.mearnic.whale.cloud</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>whale-business</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>business-user</module>
-    </modules>
+    <artifactId>whale-cloud-client</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
