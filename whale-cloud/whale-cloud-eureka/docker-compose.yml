@@ -1,0 +1,12 @@
+version: '2'
+services:
+  whale-cloud-eureka:
+    build: .
+    environment:
+      - server.port=8760
+      - JAVA_OPTS='-Xmx64m -Xms64m'
+    ports:
+      - "8760:8760"
+    volumes:
+      - ~/system/docker/whale/logs/whale-cloud-eureka:/var/logs
+    container_name: whale-cloud-eureka
