@@ -8,5 +8,5 @@ services:
     ports:
       - "8760:8760"
     volumes:
-      - ~/system/docker/whale/logs/whale-cloud-eureka:/var/logs
+      - /usr/local/var/logs/whale-docker/eureka:/usr/local/var/logs/whale/eureka
     container_name: whale-cloud-eureka

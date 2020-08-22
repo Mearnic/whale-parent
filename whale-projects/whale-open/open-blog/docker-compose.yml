@@ -3,10 +3,12 @@ services:
   open-blog:
     build: .
     environment:
-      - server.port=3154
-      - JAVA_OPTS='-Xmx64m -Xms64m'
+      - JAVA_OPTS='-Xmx256m -Xms256m'
+      - eureka.client.service-url.defaultZone=http://whale-cloud-eureka:8760/eureka/
     ports:
       - "3154:3154"
+    links:
+      - whale-cloud-eureka
     volumes:
-      - ~/system/docker/whale/logs/open-blog:/var/logs
+      - /usr/local/var/logs/whale-docker/open-blog:/usr/local/var/logs/whale/open-blog
     container_name: open-blog

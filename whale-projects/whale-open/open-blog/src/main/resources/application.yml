@@ -4,3 +4,22 @@ server:
 spring:
   application:
     name: open-blog
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://127.0.0.1:8760/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  file: /usr/local/var/logs/whale/open-blog/console.log
+  level:
+    root: info

@@ -13,6 +13,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.mearnic.whale.module</groupId>
+            <artifactId>whale-module-web</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
             <groupId>com.mearnic.whale.cloud</groupId>
             <artifactId>whale-cloud-client</artifactId>
             <version>${revision}</version>

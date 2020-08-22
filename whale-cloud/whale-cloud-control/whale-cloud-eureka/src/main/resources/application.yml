@@ -19,6 +19,11 @@ eureka:
       defaultZone: http://peer:tiger@127.0.0.1:8760/eureka/
 #      defaultZone: http://peer:tiger@peer8761:8761/eureka/,http://peer:tiger@peer8762:8762/eureka/,http://peer:tiger@peer8763:8763/eureka/
 
+logging:
+  file: /usr/local/var/logs/whale/eureka/console.log
+  level:
+    root: info
+
 ---
 # 启动参数 --spring.profiles.active=peer8761
 spring:
