@@ -16,7 +16,7 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://peer:tiger@127.0.0.1:8760/eureka/
+      defaultZone: http://peer:tiger@peer8760:8760/eureka/
 #      defaultZone: http://peer:tiger@peer8761:8761/eureka/,http://peer:tiger@peer8762:8762/eureka/,http://peer:tiger@peer8763:8763/eureka/
 
 logging:

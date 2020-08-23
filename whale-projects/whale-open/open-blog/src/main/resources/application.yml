@@ -15,7 +15,7 @@ eureka:
     healthcheck:
       enabled: true
     service-url:
-      defaultZone: http://127.0.0.1:8760/eureka/
+      defaultZone: http://peer:tiger@peer8760:8760/eureka/
   instance:
     prefer-ip-address: true
 

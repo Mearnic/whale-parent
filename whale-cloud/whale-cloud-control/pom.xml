@@ -14,7 +14,14 @@
 
     <modules>
         <module>whale-cloud-eureka</module>
+        <module>whale-cloud-config</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
