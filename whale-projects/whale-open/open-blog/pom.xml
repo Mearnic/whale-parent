@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.mearnic.whale.cloud</groupId>
-            <artifactId>whale-cloud-client</artifactId>
+            <artifactId>whale-cloud-starter</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>
