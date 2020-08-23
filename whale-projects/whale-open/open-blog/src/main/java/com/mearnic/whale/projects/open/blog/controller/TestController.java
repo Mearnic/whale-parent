@@ -14,13 +14,13 @@ import javax.annotation.Resource;
 @RequestMapping
 public class TestController {
 
-    @Value("${profile}")
+    @Value("${logging.level.root}")
     private String profile;
 
     @Resource
     private BlogService userService;
 
-    @GetMapping(value = "/getUser")
+    @GetMapping(value = "/file")
     public String queryUserList() {
         return profile;
     }
