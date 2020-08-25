@@ -89,7 +89,7 @@
                 <version>1.1.0</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
-                    <outputDirectory>${project.basedir}</outputDirectory>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
                 </configuration>
                 <executions>
