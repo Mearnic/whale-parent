@@ -15,7 +15,7 @@
         <dependency>
             <groupId>com.mearnic.whale.module</groupId>
             <artifactId>whale-module-web</artifactId>
-            <version>${revision}</version>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>com.mearnic.whale.cloud</groupId>
