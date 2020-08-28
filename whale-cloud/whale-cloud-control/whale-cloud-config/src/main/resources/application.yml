@@ -1,5 +1,5 @@
 server:
-  port: 8880
+  port: 8770
 spring:
   profiles:
     active: git
@@ -16,7 +16,7 @@ spring:
           username: 1335666107@qq.com
           password: '{cipher}AEB0gm5W7kykBv3cmTSkmSayeKxfrhckxb6L07EBcjlw1byoEGD6YfSwa838h8YwfhpKXbpKR4fh4ZPyOe7QzjWsQwBcDRJaiLokHNOZtSawSXzutXiTBJ3/QCHlWHRDqKs='
   rabbitmq:
-    host: localhost
+    host: host.docker.internal
     port: 5672
     username: root
     password: tiger
@@ -37,6 +37,6 @@ eureka:
     healthcheck:
       enabled: true
     service-url:
-      defaultZone: http://peer:tiger@peer8760:8760/eureka/
+      defaultZone: http://peer:tiger@host.docker.internal:8760/eureka/,http://peer:tiger@host.docker.internal:8761/eureka/
   instance:
     prefer-ip-address: true

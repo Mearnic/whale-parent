@@ -1,0 +1,25 @@
+version: '2'
+services:
+  whale-cloud-config-1:
+    build: .
+    image: whale-cloud-config
+    environment:
+      - server.port=8770
+      - JAVA_OPTS='-Xmx64m -Xms64m'
+    ports:
+      - "8770:8770"
+      - "9770:9770"
+    volumes:
+      - /usr/local/var/logs/whale-docker/cloud-config-1:/usr/local/var/logs/whale/cloud-config
+    container_name: whale-cloud-config1
+  whale-cloud-config-2:
+    image: whale-cloud-config
+    environment:
+      - server.port=8770
+      - JAVA_OPTS='-Xmx64m -Xms64m'
+    ports:
+      - "8771:8770"
+      - "9771:9770"
+    volumes:
+      - /usr/local/var/logs/whale-docker/cloud-config-2:/usr/local/var/logs/whale/cloud-config
+    container_name: whale-cloud-config2

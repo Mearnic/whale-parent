@@ -8,8 +8,9 @@ services:
       - JAVA_OPTS='-Xmx64m -Xms64m'
     ports:
       - "8760:8760"
+      - "9760:9760"
     volumes:
-      - /usr/local/var/logs/whale-docker/eureka1:/usr/local/var/logs/whale/eureka
+      - /usr/local/var/logs/whale-docker/cloud-eureka-1:/usr/local/var/logs/whale/cloud-eureka
     container_name: whale-cloud-eureka1
   whale-cloud-eureka-2:
     image: whale-cloud-eureka
@@ -18,6 +19,7 @@ services:
       - JAVA_OPTS='-Xmx64m -Xms64m'
     ports:
       - "8761:8760"
+      - "9761:9760"
     volumes:
-      - /usr/local/var/logs/whale-docker/eureka2:/usr/local/var/logs/whale/eureka
+      - /usr/local/var/logs/whale-docker/cloud-eureka-2:/usr/local/var/logs/whale/cloud-eureka
     container_name: whale-cloud-eureka2
