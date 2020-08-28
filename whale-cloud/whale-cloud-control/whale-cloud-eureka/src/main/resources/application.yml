@@ -10,14 +10,15 @@ spring:
       password: tiger
 
 eureka:
+  server:
+    peer-node-read-timeout-ms: 5000
   client:
     healthcheck:
       enabled: true
-    register-with-eureka: false
+    register-with-eureka: true
     fetch-registry: false
     service-url:
-      defaultZone: http://peer:tiger@peer8760:8760/eureka/
-#      defaultZone: http://peer:tiger@peer8761:8761/eureka/,http://peer:tiger@peer8762:8762/eureka/,http://peer:tiger@peer8763:8763/eureka/
+      defaultZone: http://peer:tiger@host.docker.internal:8760/eureka/,http://peer:tiger@host.docker.internal:8761/eureka/
 
 logging:
   file: /usr/local/var/logs/whale/eureka/console.log
