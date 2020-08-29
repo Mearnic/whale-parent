@@ -6,7 +6,7 @@ services:
     environment:
       - eureka.client.service-url.defaultZone=http://peer:tiger@whale-cloud-eureka-1:8760/eureka/,http://peer:tiger@whale-cloud-eureka-2:8761/eureka/
       - spring.rabbitmq.host=rabbit
-      - spring.cloud.config.uri=http://whale-cloud-config-1:8770/
+      - spring.cloud.config.uri=whale-cloud-config
     command: java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9999 -jar /usr/local/open-blog-1.0-SNAPSHOT.jar
     ports:
       - "3154:3154"
@@ -24,7 +24,7 @@ services:
     environment:
       - eureka.client.service-url.defaultZone=http://peer:tiger@whale-cloud-eureka-1:8760/eureka/,http://peer:tiger@whale-cloud-eureka-2:8761/eureka/
       - spring.rabbitmq.host=rabbit
-      - spring.cloud.config.uri=http://whale-cloud-config-2:8771/
+      - spring.cloud.config.uri=whale-cloud-config
     command: java -jar /usr/local/open-blog-1.0-SNAPSHOT.jar
     ports:
       - "3155:3154"
