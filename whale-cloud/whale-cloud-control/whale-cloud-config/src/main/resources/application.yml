@@ -37,6 +37,6 @@ eureka:
     healthcheck:
       enabled: true
     service-url:
-      defaultZone: http://peer:tiger@host.docker.internal:8760/eureka/,http://peer:tiger@host.docker.internal:8761/eureka/
+      defaultZone: http://peer:tiger@127.0.0.1:8760/eureka/
   instance:
     prefer-ip-address: true

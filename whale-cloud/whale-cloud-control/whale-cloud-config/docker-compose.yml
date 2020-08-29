@@ -1,25 +1,36 @@
-version: '2'
+version: '2.4'
 services:
   whale-cloud-config-1:
     build: .
     image: whale-cloud-config
     environment:
-      - server.port=8770
+      - eureka.client.service-url.defaultZone=http://peer:tiger@whale-cloud-eureka-1:8760/eureka/,http://peer:tiger@whale-cloud-eureka-2:8761/eureka/
+      - spring.rabbitmq.host=rabbit
       - JAVA_OPTS='-Xmx64m -Xms64m'
+    command: java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9999 -jar /usr/local/whale-cloud-config-1.0-SNAPSHOT.jar
     ports:
       - "8770:8770"
-      - "9770:9770"
+      - "9770:9999"
+    links:
+      - whale-cloud-eureka-1
+      - whale-cloud-eureka-2
+      - rabbit
     volumes:
       - /usr/local/var/logs/whale-docker/cloud-config-1:/usr/local/var/logs/whale/cloud-config
-    container_name: whale-cloud-config1
+    container_name: whale-cloud-config-1
   whale-cloud-config-2:
     image: whale-cloud-config
     environment:
-      - server.port=8770
+      - eureka.client.service-url.defaultZone=http://peer:tiger@whale-cloud-eureka-1:8760/eureka/,http://peer:tiger@whale-cloud-eureka-2:8761/eureka/
+      - spring.rabbitmq.host=rabbit
       - JAVA_OPTS='-Xmx64m -Xms64m'
+    command: java -jar /usr/local/whale-cloud-config-1.0-SNAPSHOT.jar
     ports:
       - "8771:8770"
-      - "9771:9770"
+    links:
+      - whale-cloud-eureka-1
+      - whale-cloud-eureka-2
+      - rabbit
     volumes:
       - /usr/local/var/logs/whale-docker/cloud-config-2:/usr/local/var/logs/whale/cloud-config
-    container_name: whale-cloud-config2
+    container_name: whale-cloud-config-2

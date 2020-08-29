@@ -1,15 +1,38 @@
-version: '2'
+version: '2.4'
 services:
-  open-blog:
+  open-blog-1:
     build: .
+    image: open-blog
     environment:
-      - JAVA_OPTS='-Xmx256m -Xms256m'
-      - eureka.client.service-url.defaultZone=http://whale-cloud-eureka:8760/eureka/
+      - eureka.client.service-url.defaultZone=http://peer:tiger@whale-cloud-eureka-1:8760/eureka/,http://peer:tiger@whale-cloud-eureka-2:8761/eureka/
+      - spring.rabbitmq.host=rabbit
+      - spring.cloud.config.uri=http://whale-cloud-config-1:8770/
+    command: java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9999 -jar /usr/local/open-blog-1.0-SNAPSHOT.jar
     ports:
       - "3154:3154"
-      - "4154:4154"
+      - "4154:9999"
     links:
-      - whale-cloud-eureka
+      - whale-cloud-eureka-1
+      - whale-cloud-eureka-2
+      - whale-cloud-config-1
+      - rabbit
     volumes:
-      - /usr/local/var/logs/whale-docker/open-blog:/usr/local/var/logs/whale/open-blog
-    container_name: open-blog
+      - /usr/local/var/logs/whale-docker/open-blog-1:/usr/local/var/logs/whale/open-blog
+    container_name: open-blog-1
+  open-blog-2:
+    image: open-blog
+    environment:
+      - eureka.client.service-url.defaultZone=http://peer:tiger@whale-cloud-eureka-1:8760/eureka/,http://peer:tiger@whale-cloud-eureka-2:8761/eureka/
+      - spring.rabbitmq.host=rabbit
+      - spring.cloud.config.uri=http://whale-cloud-config-2:8771/
+    command: java -jar /usr/local/open-blog-1.0-SNAPSHOT.jar
+    ports:
+      - "3155:3154"
+    links:
+      - whale-cloud-eureka-1
+      - whale-cloud-eureka-2
+      - whale-cloud-config-1
+      - rabbit
+    volumes:
+      - /usr/local/var/logs/whale-docker/open-blog-2:/usr/local/var/logs/whale/open-blog
+    container_name: open-blog-2
