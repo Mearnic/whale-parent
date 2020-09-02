@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: ${spring.profiles.active:dev}
   application:
     name: open-blog
   cloud:
@@ -16,14 +18,14 @@ spring:
         enabled: true
       enabled: true
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: root
-    password: tiger
+    host: ${db.rabbitmq.host}
+    port: ${db.rabbitmq.port}
+    name: ${db.rabbitmq.username}
+    password: ${db.rabbitmq.password}
 eureka:
   client:
     service-url:
-      defaultZone: http://peer:tiger@127.0.0.1:8760/eureka/
+      defaultZone: ${cloud.eureka.url}
   instance:
     prefer-ip-address: true
 management:
