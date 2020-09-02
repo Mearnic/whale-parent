@@ -2,7 +2,8 @@ server:
   port: 8770
 spring:
   profiles:
-    active: git
+#    active: git
+    include: ${spring.profiles.active:dev}, ${spring.profiles.active:dev-encrypt}
   application:
     name: whale-cloud-config
   cloud:
@@ -12,19 +13,18 @@ spring:
     config:
       server:
         git:
-          uri: https://gitee.com/mearnic/whale-cloud-config.git
-          username: 1335666107@qq.com
-          password: '{cipher}AEB0gm5W7kykBv3cmTSkmSayeKxfrhckxb6L07EBcjlw1byoEGD6YfSwa838h8YwfhpKXbpKR4fh4ZPyOe7QzjWsQwBcDRJaiLokHNOZtSawSXzutXiTBJ3/QCHlWHRDqKs='
+          uri: ${cloud.config.uri}
+          username: ${cloud.config.username}
+          password: ${cloud.config.password}
   rabbitmq:
-    host: host.docker.internal
-    port: 5672
-    username: root
-    password: tiger
+    host: ${db.rabbitmq.host}
+    port: ${db.rabbitmq.port}
+    name: ${db.rabbitmq.username}
+    password: ${db.rabbitmq.password}
   security:
     user:
-      name: root
-      password: tiger
-
+      name: ${default.account.security.username}
+      password: ${default.account.security.password}
 
 management:
   endpoints:
@@ -37,6 +37,6 @@ eureka:
     healthcheck:
       enabled: true
     service-url:
-      defaultZone: http://peer:tiger@127.0.0.1:8760/eureka/
+      defaultZone: ${cloud.eureka.url}
   instance:
     prefer-ip-address: true

@@ -1,0 +1,40 @@
+common:
+  mail: 1335666107@qq.com
+  host: localhost
+  logger:
+    file:
+      root-path: /usr/local/var/logs/whale
+      name: console.log
+      level: info
+
+default:
+  account:
+    security:
+      username: peer
+      password: tiger
+    db:
+      username: root
+      password: tiger
+
+db:
+  mysql:
+    host: ${common.host}
+    port: 3306
+    username: ${default.account.db.username}
+    password: ${default.account.db.password}
+  rabbitmq:
+    host: ${common.host}
+    port: 5672
+    username: ${default.account.db.username}
+    password: ${default.account.db.password}
+
+cloud:
+  config:
+    uri: https://gitee.com/mearnic/whale-cloud-config.git
+    username: ${common.mail}
+  eureka:
+    host: ${common.host}
+    port: 8760
+    username: ${default.account.security.username}
+    password: ${default.account.security.password}
+    url: "http://${cloud.eureka.username}:${cloud.eureka.password}@${cloud.eureka.host}:${cloud.eureka.port}/eureka/"
