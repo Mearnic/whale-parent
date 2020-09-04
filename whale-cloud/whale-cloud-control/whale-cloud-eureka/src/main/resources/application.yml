@@ -12,6 +12,8 @@ spring:
       password: ${default.account.security.password}
 
 eureka:
+  server:
+    peer-node-read-timeout-ms: 1000
   client:
     healthcheck:
       enabled: true
