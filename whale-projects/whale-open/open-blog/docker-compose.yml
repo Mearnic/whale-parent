@@ -4,7 +4,7 @@ services:
     build: .
     image: open-blog
     environment:
-      - eureka.client.service-url.defaultZone=http://peer:tiger@whale-cloud-eureka-1:8760/eureka/,http://peer:tiger@whale-cloud-eureka-2:8761/eureka/
+      - eureka.client.service-url.defaultZone=http://peer:tiger@host.docker.internal:8760/eureka/,http://peer:tiger@host.docker.internal:8761/eureka/
       - spring.rabbitmq.host=rabbit
       - spring.cloud.config.uri=whale-cloud-config
     command: java -jar /usr/local/open-blog-1.0-SNAPSHOT.jar
@@ -24,7 +24,7 @@ services:
   open-blog-2:
     image: open-blog
     environment:
-      - eureka.client.service-url.defaultZone=http://peer:tiger@whale-cloud-eureka-1:8760/eureka/,http://peer:tiger@whale-cloud-eureka-2:8761/eureka/
+      - eureka.client.service-url.defaultZone=http://peer:tiger@host.docker.internal:8760/eureka/,http://peer:tiger@host.docker.internal:8761/eureka/
       - spring.rabbitmq.host=rabbit
       - spring.cloud.config.uri=whale-cloud-config
     command: java -jar /usr/local/open-blog-1.0-SNAPSHOT.jar

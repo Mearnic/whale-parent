@@ -2,9 +2,9 @@ server:
   port: 8770
 spring:
   profiles:
-    active: git
-    include: dev, dev-encrypt
-  #    include: ${spring.profiles.active:dev}, ${spring.profiles.active:dev-encrypt}
+#    active: git
+#    include: dev, dev-encrypt
+    include: ${spring.profiles.active:dev}, ${spring.profiles.active:dev-encrypt}
   application:
     name: whale-cloud-config
   cloud:
