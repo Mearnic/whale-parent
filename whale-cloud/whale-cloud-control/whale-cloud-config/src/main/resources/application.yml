@@ -19,8 +19,8 @@ spring:
   rabbitmq:
     host: ${db.rabbitmq.host}
     port: ${db.rabbitmq.port}
-    name: ${db.rabbitmq.username}
     password: ${db.rabbitmq.password}
+    username: ${db.rabbitmq.username}
   security:
     user:
       name: ${default.account.security.username}

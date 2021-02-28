@@ -20,8 +20,8 @@ spring:
   rabbitmq:
     host: ${db.rabbitmq.host}
     port: ${db.rabbitmq.port}
-    name: ${db.rabbitmq.username}
     password: ${db.rabbitmq.password}
+    username: ${db.rabbitmq.username}
 eureka:
   client:
     service-url:
