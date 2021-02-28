@@ -2,8 +2,9 @@ server:
   port: 8770
 spring:
   profiles:
-#    active: git
-    include: ${spring.profiles.active:dev}, ${spring.profiles.active:dev-encrypt}
+    active: git
+    include: dev, dev-encrypt
+  #    include: ${spring.profiles.active:dev}, ${spring.profiles.active:dev-encrypt}
   application:
     name: whale-cloud-config
   cloud:
@@ -37,6 +38,6 @@ eureka:
     healthcheck:
       enabled: true
     service-url:
-      defaultZone: ${cloud.eureka.url}
+      defaultZone: http://peer:tiger@host.docker.internal:8760/eureka/,http://peer:tiger@host.docker.internal:8761/eureka/
   instance:
     prefer-ip-address: true
