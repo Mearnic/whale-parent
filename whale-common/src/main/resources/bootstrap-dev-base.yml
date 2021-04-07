@@ -36,4 +36,4 @@ cloud:
     port: 8760
     username: ${default.account.security.username}
     password: ${default.account.security.password}
-    url: "http://${cloud.eureka.username}:${cloud.eureka.password}@${cloud.eureka.host}:${cloud.eureka.port}/eureka/"
+    url: "http://${cloud.eureka.username}:${cloud.eureka.password}@${common.host}:${cloud.eureka.port}/eureka/"

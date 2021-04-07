@@ -2,7 +2,7 @@ server:
   port: 8770
 spring:
   profiles:
-    include: dev-base, dev-encrypt
+    include: test-base, test-encrypt
   cloud:
     bus:
       trace:
