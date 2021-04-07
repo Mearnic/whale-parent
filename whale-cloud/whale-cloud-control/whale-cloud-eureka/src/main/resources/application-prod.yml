@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    include: prod-base
+  security:
+    user:
+      name: ${default.account.security.username}
+      password: ${default.account.security.password}
+
+eureka:
+  server:
+    peer-node-read-timeout-ms: 1000
+  client:
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: false
+    service-url:
+      defaultZone: ${cloud.eureka.url}
+
+logging:
+  file: ${common.logger.file.root-path}/${spring.application.name}/${common.logger.file.name}
+  level:
+    root: ${common.logger.file.level}
