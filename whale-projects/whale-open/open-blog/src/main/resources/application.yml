@@ -1,7 +1,0 @@
-server:
-  port: 3154
-
-logging:
-  file: /usr/local/var/logs/whale/open-blog/console.log
-  level:
-    root: info

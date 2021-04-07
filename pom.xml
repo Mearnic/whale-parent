@@ -27,7 +27,6 @@
         <module>whale-cloud</module>
         <module>whale-common</module>
         <module>whale-plugins</module>
-        <module>whale-projects</module>
         <module>whale-module</module>
     </modules>
     <dependencies>
