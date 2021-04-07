@@ -1,8 +1,0 @@
-server:
-  port: 8760
-
-spring:
-  profiles:
-    active: dev
-  application:
-    name: whale-cloud-eureka

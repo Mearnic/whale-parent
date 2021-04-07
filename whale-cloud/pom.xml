@@ -15,7 +15,6 @@
 
     <modules>
         <module>whale-cloud-dependency</module>
-        <module>whale-cloud-control</module>
     </modules>
     <dependencies>
         <dependency>
