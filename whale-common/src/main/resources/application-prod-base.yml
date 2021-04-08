@@ -1,5 +1,9 @@
 common:
-  mail: 1335666107@qq.com
+  mail: mearnic@icloud.com
+  gitee:
+    username: 1335666107@qq.com
+    home: https://gitee.com/mearnic
+    config: whale-cloud-config.git
   host: localhost
   logger:
     file:
@@ -19,6 +23,7 @@ default:
 db:
   mysql:
     host: ${common.host}
+    port: 3306
     username: ${default.account.db.username}
     password: ${default.account.db.password}
   rabbitmq:
@@ -26,14 +31,27 @@ db:
     port: 5672
     username: ${default.account.db.username}
     password: ${default.account.db.password}
-
-cloud:
   config:
-    uri: https://gitee.com/mearnic/whale-cloud-config.git
-    username: ${common.mail}
+    host: ${common.host}
+    port: 8770
+    username: ${default.account.security.username}
+    password: ${default.account.security.password}
   eureka:
     host: ${common.host}
     port: 8760
     username: ${default.account.security.username}
     password: ${default.account.security.password}
+
+cloud:
+  config:
+    server:
+      uri: ${common.gitee.home}/${common.gitee.config}
+      username: ${common.gitee.username}
+    client:
+      uri: "http://${db.config.host}:${db.config.port}/"
+  eureka:
+    host: ${common.host}
+    port: ${db.eureka.port}
+    username: ${db.eureka.username}
+    password: ${db.eureka.password}
     url: "http://${cloud.eureka.username}:${cloud.eureka.password}@${cloud.eureka.host}:${cloud.eureka.port}/eureka/"

@@ -1,3 +1,4 @@
 cloud:
   config:
-    password: '{cipher}AEB0gm5W7kykBv3cmTSkmSayeKxfrhckxb6L07EBcjlw1byoEGD6YfSwa838h8YwfhpKXbpKR4fh4ZPyOe7QzjWsQwBcDRJaiLokHNOZtSawSXzutXiTBJ3/QCHlWHRDqKs='
+    server:
+      password: '{cipher}AEB0gm5W7kykBv3cmTSkmSayeKxfrhckxb6L07EBcjlw1byoEGD6YfSwa838h8YwfhpKXbpKR4fh4ZPyOe7QzjWsQwBcDRJaiLokHNOZtSawSXzutXiTBJ3/QCHlWHRDqKs='
