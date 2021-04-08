@@ -49,6 +49,8 @@ cloud:
       username: ${common.gitee.username}
     client:
       uri: "http://${db.config.host}:${db.config.port}/"
+      username: ${db.config.username}
+      password: ${db.config.password}
   eureka:
     host: ${common.host}
     port: ${db.eureka.port}
