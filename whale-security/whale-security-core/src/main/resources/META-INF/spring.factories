@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.mearnic.whale.security.core.config.RbacAutoConfiguration

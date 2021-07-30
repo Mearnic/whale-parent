@@ -31,6 +31,7 @@
         <module>whale-common</module>
         <module>whale-plugins</module>
         <module>whale-module</module>
+        <module>whale-security</module>
     </modules>
     <dependencies>
         <dependency>
