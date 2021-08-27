@@ -1,11 +1,11 @@
 package com.mearnic.whale.security.core.service;
 
 import com.mearnic.whale.security.core.exception.UsernameFailedException;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
@@ -21,10 +21,10 @@ public class AccountSecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (StringUtils.isNotBlank(username)) {
-            return userDetailService.findByUsername(username);
-        } else {
+        if (StringUtils.isEmpty(username)) {
             throw new UsernameFailedException("用户名不能为空");
+        } else {
+            return userDetailService.findByUsername(username);
         }
     }
 }
