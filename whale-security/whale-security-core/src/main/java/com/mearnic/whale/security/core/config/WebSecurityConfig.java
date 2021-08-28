@@ -56,8 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        List<AbstractAuthenticationProcessingFilter> filters = createFilters();
-        filters.forEach(it -> http.addFilterBefore(it, UsernamePasswordAuthenticationFilter.class));
+//        List<AbstractAuthenticationProcessingFilter> filters = createFilters();
+//        filters.forEach(it -> http.addFilterBefore(it, UsernamePasswordAuthenticationFilter.class));
         http.authorizeRequests().withObjectPostProcessor(getObjectPostProcessor())
                 .anyRequest()
                 .authenticated()

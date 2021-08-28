@@ -3,21 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>whale-parent</artifactId>
-        <groupId>com.mearnic.whale.parent</groupId>
+        <groupId>com.mearnic.whale.security</groupId>
+        <artifactId>whale-security</artifactId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.mearnic.whale.security</groupId>
-    <artifactId>whale-security</artifactId>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>whale-security-core</module>
-        <module>whale-cloud-security-oauth2</module>
-        <module>whale-cloud-security-simple-starter</module>
-    </modules>
+    <artifactId>whale-cloud-security-simple-starter</artifactId>
 
 
 </project>

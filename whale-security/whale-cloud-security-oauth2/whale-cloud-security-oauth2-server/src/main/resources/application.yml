@@ -1,0 +1,9 @@
+#  servlet:
+#    context-path: /auth
+spring:
+  application:
+    name: whale-cloud-oauth2-server
+  thymeleaf:
+    prefix: classpath:/views/
+    suffix: .html
+    cache: false

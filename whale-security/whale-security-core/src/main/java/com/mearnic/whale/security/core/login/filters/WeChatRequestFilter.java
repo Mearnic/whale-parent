@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WeChatRequestFilter extends AbstractAuthenticationProcessingFilter {
 
-    private final static String REQUEST_PATH_LOGIN = "/weChat";
+    private final static String REQUEST_PATH_LOGIN = "/chat";
     private final static String REQUEST_PATH_TYPE = "GET";
 
     public WeChatRequestFilter() {
