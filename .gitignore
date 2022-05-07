@@ -3,3 +3,7 @@
 **/*.iml
 **/target/**
 **/.flattened-pom.xml
+.classpath
+.project
+.factorypath
+.settings

@@ -6,5 +6,5 @@ package com.mearnic.whale.security.core.constant;
  */
 public class PackageConstant {
 
-    public final static String LOGIN_FILTERS_PACKAGE = "com.mearnic.whale.cloud.security.core.login.filters";
+    public final static String LOGIN_FILTERS_PACKAGE = "com.mearnic.whale.security.core.login.filters";
 }

@@ -56,8 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        List<AbstractAuthenticationProcessingFilter> filters = createFilters();
-//        filters.forEach(it -> http.addFilterBefore(it, UsernamePasswordAuthenticationFilter.class));
+        List<AbstractAuthenticationProcessingFilter> filters = createFilters();
+        filters.forEach(it -> http.addFilterBefore(it, UsernamePasswordAuthenticationFilter.class));
         http.authorizeRequests().withObjectPostProcessor(getObjectPostProcessor())
                 .anyRequest()
                 .authenticated()
@@ -65,10 +65,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();
         // TODO 如果是security服务, 需要开启跳转登录页面, 不能重构.(重构需要自己实现登录页面逻辑)
+        http.formLogin().permitAll();
         http.exceptionHandling().authenticationEntryPoint(defaultAuthenticationEntryPoint);
         http.exceptionHandling().accessDeniedHandler(defaultAccessDeniedHandler);
         http.logout().logoutSuccessHandler(defaultLogoutSuccessHandler);
-        super.configure(http);
+//        super.configure(http);
     }
 
     @Override
