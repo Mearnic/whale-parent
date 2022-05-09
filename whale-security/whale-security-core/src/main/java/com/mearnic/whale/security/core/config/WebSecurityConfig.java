@@ -3,7 +3,9 @@ package com.mearnic.whale.security.core.config;
 //import com.mearnic.whale.cloud.security.core.component.DefaultObjectPostProcessor;
 
 import com.mearnic.whale.security.core.constant.PackageConstant;
+import com.mearnic.whale.security.core.filters.DefaultTokenRequestFilter;
 import com.mearnic.whale.security.core.response.*;
+import com.mearnic.whale.security.core.service.TokenService;
 import org.reflections.Reflections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDecisionManager;
@@ -14,6 +16,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
@@ -27,45 +30,66 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @EnableWebSecurity
+//@EnableRedisHttpSession(redisNamespace = "spring:session:security", maxInactiveIntervalInSeconds = 1700, flushMode = FlushMode.ON_SAVE)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Resource
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Resource
-    List<AuthenticationProvider> authenticationProviders;
+    private List<AuthenticationProvider> authenticationProviders;
 
     @Resource
-    DefaultAccessDeniedHandler defaultAccessDeniedHandler;
+    private DefaultAccessDeniedHandler defaultAccessDeniedHandler;
     @Resource
-    DefaultLogoutSuccessHandler defaultLogoutSuccessHandler;
+    private DefaultLogoutSuccessHandler defaultLogoutSuccessHandler;
     @Resource
-    DefaultAuthenticationEntryPoint defaultAuthenticationEntryPoint;
+    private DefaultAuthenticationEntryPoint defaultAuthenticationEntryPoint;
     @Resource
-    DefaultAuthenticationFailureHandler defaultAuthenticationFailureHandler;
+    private DefaultAuthenticationFailureHandler defaultAuthenticationFailureHandler;
     @Resource
-    DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler;
+    private DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler;
 
     @Resource
-    FilterInvocationSecurityMetadataSource defaultFilterInvocationSecurityMetadataSource;
+    private FilterInvocationSecurityMetadataSource defaultFilterInvocationSecurityMetadataSource;
+
     @Resource
-    AccessDecisionManager defaultAccessDecisionManager;
+    private AccessDecisionManager defaultAccessDecisionManager;
+
+    @Resource
+    private TokenService tokenService;
+//
+//    @Resource
+//    @Lazy
+//    private FindByIndexNameSessionRepository<? extends Session> sessionRepository;
+
+//
+//    @Bean
+//    public SpringSessionBackedSessionRegistry sessionRegistry(){
+//        return new SpringSessionBackedSessionRegistry<>(sessionRepository);
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         List<AbstractAuthenticationProcessingFilter> filters = createFilters();
         filters.forEach(it -> http.addFilterBefore(it, UsernamePasswordAuthenticationFilter.class));
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().withObjectPostProcessor(getObjectPostProcessor())
                 .anyRequest()
                 .authenticated()
                 .and()
+//                .sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true)
+//                .sessionRegistry(sessionRegistry())
+//                .and()
+//                .and()
                 .csrf()
                 .disable();
         // TODO 如果是security服务, 需要开启跳转登录页面, 不能重构.(重构需要自己实现登录页面逻辑)
         http.formLogin().permitAll();
+        http.addFilter(new DefaultTokenRequestFilter(authenticationManager(), tokenService, 7));
         http.exceptionHandling().authenticationEntryPoint(defaultAuthenticationEntryPoint);
         http.exceptionHandling().accessDeniedHandler(defaultAccessDeniedHandler);
         http.logout().logoutSuccessHandler(defaultLogoutSuccessHandler);
@@ -107,6 +131,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 filter.setAuthenticationManager(authenticationManager);
                 filter.setAuthenticationSuccessHandler(defaultAuthenticationSuccessHandler);
                 filter.setAuthenticationFailureHandler(defaultAuthenticationFailureHandler);
+//                filter.setSessionAuthenticationStrategy(new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry()));
             } catch (Exception e) {
                 // TODO logger error
             }
