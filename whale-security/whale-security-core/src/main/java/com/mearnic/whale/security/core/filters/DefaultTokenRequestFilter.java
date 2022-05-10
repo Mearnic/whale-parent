@@ -1,25 +1,23 @@
 package com.mearnic.whale.security.core.filters;
 
-import com.mearnic.whale.security.core.exception.UsernameFailedException;
+import com.mearnic.whale.security.core.model.LoginUser;
+import com.mearnic.whale.security.core.request.MutableHttpServletRequest;
 import com.mearnic.whale.security.core.service.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 public class DefaultTokenRequestFilter extends BasicAuthenticationFilter {
 
-    private TokenService tokenService;
+    private final TokenService tokenService;
 
     public DefaultTokenRequestFilter(AuthenticationManager authenticationManager, TokenService tokenService) {
         super(authenticationManager);
@@ -29,22 +27,25 @@ public class DefaultTokenRequestFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-
-        Set<GrantedAuthority> authorities = new HashSet<>();
+        // 获取token
         String token = request.getHeader("token");
 
+        // 鉴定token是否有效
         if (token == null || token.isEmpty()) {
             super.doFilterInternal(request, response, chain);
         } else {
-            String name = tokenService.parseToken(token);
-            UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(name, "tiger");
-//        authRequest = null;
-            //将Authentication对象放进springsecurity上下文中（进行认证操作）
+            LoginUser user = tokenService.parseToken(token);
+            String realToken = tokenService.getRealToken(user.getUsername());
+            MutableHttpServletRequest mutableRequest = new MutableHttpServletRequest(request);
+            mutableRequest.putHeader("token", realToken);
+            UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+            //将Authentication对象放进springSecurity上下文中（进行认证操作）
             SecurityContextHolder.getContext().setAuthentication(authRequest);
-
-//		super.doFilterInternal(request, response, chain);
-            chain.doFilter(request, response);
+            chain.doFilter(mutableRequest, response);
+//            chain.doFilter(request, response);
         }
-
+        // 鉴定用户信息是否修改
+        // 如果token有效且未修改,直接处理权限问题
+        // 如果token有效但是修改了,创建新的token替代
     }
 }

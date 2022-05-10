@@ -32,6 +32,7 @@ public enum EStatus {
     SOURCE_FILE_ERROR(402, "资源不存在"),
 
     // 代码层面的错误500起
+    LOGIN_OUT_FAIL(500, "注销失败"),
     CODE_ERROR(500, "服务器异常");
 
     private final int key;

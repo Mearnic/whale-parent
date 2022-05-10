@@ -3,7 +3,10 @@ package com.mearnic.whale.security.core.response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mearnic.whale.security.core.bean.EStatus;
 import com.mearnic.whale.security.core.bean.R;
+import com.mearnic.whale.security.core.model.LoginUser;
+import com.mearnic.whale.security.core.service.TokenService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +22,25 @@ public class DefaultLogoutSuccessHandler implements LogoutSuccessHandler {
     @Resource
     private ObjectMapper objectMapper;
 
+    @Resource
+    private TokenService tokenService;
+
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-        String result = objectMapper.writeValueAsString(R.ok(EStatus.LOGIN_OUT_SUCCESS));
+        String token = request.getHeader("token");
+        String result;
+        if (request.getHeader("token") == null || token.isEmpty()) {
+            result = objectMapper.writeValueAsString(R.ok(EStatus.LOGIN_OUT_FAIL));
+        } else {
+            LoginUser loginUser = tokenService.parseToken(token);
+            boolean isOk = tokenService.deleteToken(loginUser.getUsername());
+            if (isOk) {
+                result = objectMapper.writeValueAsString(R.ok(EStatus.LOGIN_OUT_SUCCESS));
+            }else{
+                result = objectMapper.writeValueAsString(R.ok(EStatus.LOGIN_OUT_FAIL));
+            }
+        }
         response.getWriter().write(result);
     }
 }
