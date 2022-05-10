@@ -88,11 +88,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();
         // TODO 如果是security服务, 需要开启跳转登录页面, 不能重构.(重构需要自己实现登录页面逻辑)
-        http.formLogin().permitAll();
-        http.addFilter(new DefaultTokenRequestFilter(authenticationManager(), tokenService, 7));
+//        http.formLogin().permitAll();
+//        http.formLogin().permitAll();
         http.exceptionHandling().authenticationEntryPoint(defaultAuthenticationEntryPoint);
         http.exceptionHandling().accessDeniedHandler(defaultAccessDeniedHandler);
         http.logout().logoutSuccessHandler(defaultLogoutSuccessHandler);
+        http.addFilter(new DefaultTokenRequestFilter(authenticationManager(), tokenService));
 //        super.configure(http);
     }
 

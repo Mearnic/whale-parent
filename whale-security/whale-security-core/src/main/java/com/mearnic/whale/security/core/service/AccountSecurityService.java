@@ -24,7 +24,12 @@ public class AccountSecurityService implements UserDetailsService {
         if (StringUtils.isEmpty(username)) {
             throw new UsernameFailedException("用户名不能为空");
         } else {
-            return userDetailService.findByUsername(username);
+            try {
+                return userDetailService.findByUsername(username);
+            }
+            catch (Exception e) {
+                throw new UsernameNotFoundException("未注册用户");
+            }
         }
     }
 }

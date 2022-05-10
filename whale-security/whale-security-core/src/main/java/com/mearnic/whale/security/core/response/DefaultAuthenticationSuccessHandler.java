@@ -1,6 +1,11 @@
 package com.mearnic.whale.security.core.response;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.mearnic.whale.security.core.bean.EStatus;
+import com.mearnic.whale.security.core.bean.R;
 import com.mearnic.whale.security.core.service.TokenService;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -23,22 +28,15 @@ public class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
     @Resource
     private TokenService tokenService;
 
+    @Resource
+    private ObjectMapper objectMapper;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
         User userDetail = (User) authentication.getPrincipal();
-//        String attribute = request.getAttribute(CsrfToken.class.getName()).toString();
-        response.getWriter().write("JSON_SUCCESS:" + tokenService.createToken(userDetail));
-
-
-//        User userDetail = (User) authentication.getPrincipal();
-//        String passWord = userDetail.getPassword();
-//
-//        response.setContentType("application/json;charset=UTF-8");
-//        CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-//
-////        response.getWriter().write("JSON_SUCCESS");
-//        response.getWriter().write(userDetail.getUsername() + "-" + token);
-
+        String token = tokenService.createToken(userDetail);
+        String result = objectMapper.writeValueAsString(R.ok(EStatus.LOGIN_SUCCESS).data(token));
+        response.getWriter().write(result);
     }
 }
