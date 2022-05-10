@@ -39,4 +39,12 @@ public class DefaultUserDetailService implements UserDetailService {
         userService.getUserRolesByKey(key).forEach(it -> authorities.add(new DefaultGrantedAuthority(it.getName())));
         return authorities;
     }
+
+    @Override
+    public UserDetails getUserByThirdParty(String openId, String type) {
+        String userName = userService.getUserNameByThirdParty(openId, type);
+        LoginUser user = userService.findByUsername(userName);
+        return new UserDetail(user.getUsername(), user.getPassword(), getAuthoritiesByUserKey(user.getKey()));
+    }
+
 }

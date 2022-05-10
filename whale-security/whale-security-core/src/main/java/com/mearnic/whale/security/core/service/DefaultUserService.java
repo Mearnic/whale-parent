@@ -32,4 +32,9 @@ public class DefaultUserService implements UserService {
         userRoles.add(role);
         return userRoles;
     }
+
+    @Override
+    public String getUserNameByThirdParty(String openId, String type) {
+        return "admin";
+    }
 }

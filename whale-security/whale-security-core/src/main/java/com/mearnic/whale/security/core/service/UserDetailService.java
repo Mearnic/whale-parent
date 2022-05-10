@@ -15,4 +15,5 @@ public interface UserDetailService {
 
     Set<GrantedAuthority> getAuthoritiesByUserKey(String key);
 
+    UserDetails getUserByThirdParty(String openId, String type);
 }

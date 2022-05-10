@@ -1,6 +1,6 @@
 package com.mearnic.whale.security.core.login;
 
-import com.mearnic.whale.security.core.model.SecurityUser;
+import com.mearnic.whale.security.core.model.WeChatUser;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 public class WeChatAuthenticationToken extends AbstractAuthenticationToken {
 
     private String code;
-    private SecurityUser securityUser;
+    private WeChatUser weChatUser;
 
     public WeChatAuthenticationToken(String code) {
         super(null);
@@ -18,9 +18,9 @@ public class WeChatAuthenticationToken extends AbstractAuthenticationToken {
         setAuthenticated(true);
     }
 
-    public WeChatAuthenticationToken(SecurityUser securityUser) {
+    public WeChatAuthenticationToken(WeChatUser weChatUser) {
         super(null);
-        this.securityUser = securityUser;
+        this.weChatUser = weChatUser;
         setAuthenticated(true);
     }
 
@@ -30,8 +30,8 @@ public class WeChatAuthenticationToken extends AbstractAuthenticationToken {
     }
 
     @Override
-    public SecurityUser getPrincipal() {
-        return securityUser;
+    public WeChatUser getPrincipal() {
+        return weChatUser;
     }
 
 

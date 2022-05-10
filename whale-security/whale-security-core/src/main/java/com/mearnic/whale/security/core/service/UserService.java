@@ -15,4 +15,6 @@ public interface UserService {
 
     List<LoginRole> getUserRolesByKey(String key);
 
+    String getUserNameByThirdParty(String openId, String type);
+
 }
