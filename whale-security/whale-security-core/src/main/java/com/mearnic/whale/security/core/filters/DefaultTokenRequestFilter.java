@@ -42,10 +42,6 @@ public class DefaultTokenRequestFilter extends BasicAuthenticationFilter {
             //将Authentication对象放进springSecurity上下文中（进行认证操作）
             SecurityContextHolder.getContext().setAuthentication(authRequest);
             chain.doFilter(mutableRequest, response);
-//            chain.doFilter(request, response);
         }
-        // 鉴定用户信息是否修改
-        // 如果token有效且未修改,直接处理权限问题
-        // 如果token有效但是修改了,创建新的token替代
     }
 }
