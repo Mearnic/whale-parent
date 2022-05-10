@@ -23,7 +23,7 @@ public class DefaultApiDetailService implements ApiDetailService {
     }
 
     @Override
-    public List<String> findByUri(String uri) {
+    public List<String> findByUri(String uri, String method, String serverName) {
         ArrayList<String> roles = new ArrayList<>();
         if (uri.equals("/v1")) {
             roles.add("ROLE_ADMIN");
@@ -32,4 +32,15 @@ public class DefaultApiDetailService implements ApiDetailService {
         }
         return roles;
     }
+
+/*    @Override
+    public List<String> findByUri(String uri) {
+        ArrayList<String> roles = new ArrayList<>();
+        if (uri.equals("/v1")) {
+            roles.add("ROLE_ADMIN");
+        } else{
+            roles.add("ROLE_TEST");
+        }
+        return roles;
+    }*/
 }

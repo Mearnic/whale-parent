@@ -1,6 +1,7 @@
 package com.mearnic.whale.security.core.component;
 
 import com.mearnic.whale.security.core.service.ApiDetailService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -8,6 +9,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,15 +23,20 @@ public class DefaultFilterInvocationSecurityMetadataSource implements FilterInvo
     @Resource
     private ApiDetailService apiDetailService;
 
+    @Value("${spring.application.name}")
+    private  String serverName;
+
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         FilterInvocation invocation = (FilterInvocation) object;
-        String uri = invocation.getRequest().getRequestURI();
+        HttpServletRequest request = invocation.getRequest();
+        String method = request.getMethod();
+        String uri = request.getRequestURI();
         List<String> anonymityList = apiDetailService.findAnonymity();
         if (anonymityList.contains(uri)) {
             return null;
         } else {
-            List<String> roles = apiDetailService.findByUri(uri);
+            List<String> roles = apiDetailService.findByUri(uri, method, serverName);
             return SecurityConfig.createList(roles.toArray(new String[0]));
         }
     }

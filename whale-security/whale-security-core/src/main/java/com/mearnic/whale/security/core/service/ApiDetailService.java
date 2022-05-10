@@ -10,5 +10,5 @@ public interface ApiDetailService {
 
     List<String> findAnonymity();
 
-    List<String> findByUri(String uri);
+    List<String> findByUri(String uri, String method, String serverName);
 }
