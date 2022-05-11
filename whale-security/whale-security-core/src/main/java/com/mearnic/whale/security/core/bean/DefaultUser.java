@@ -9,7 +9,7 @@ import com.mearnic.whale.security.core.model.LoginUser;
  */
 public class DefaultUser implements LoginUser {
 
-    private int id;
+    private Long id;
 
     private String username;
 
@@ -18,17 +18,17 @@ public class DefaultUser implements LoginUser {
     public DefaultUser() {
     }
 
-    public DefaultUser(int id, String username, String password) {
+    public DefaultUser(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

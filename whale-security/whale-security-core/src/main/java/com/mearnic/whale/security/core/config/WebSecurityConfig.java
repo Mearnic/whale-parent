@@ -6,6 +6,7 @@ import com.mearnic.whale.security.core.constant.PackageConstant;
 import com.mearnic.whale.security.core.filters.DefaultTokenRequestFilter;
 import com.mearnic.whale.security.core.response.*;
 import com.mearnic.whale.security.core.service.TokenService;
+import com.mearnic.whale.security.core.service.UserDetailService;
 import org.reflections.Reflections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDecisionManager;
@@ -35,6 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private UserDetailsService userDetailsService;
+
+    @Resource
+    private UserDetailService userDetailService;
 
     @Resource
     private PasswordEncoder passwordEncoder;
@@ -93,7 +97,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().authenticationEntryPoint(defaultAuthenticationEntryPoint);
         http.exceptionHandling().accessDeniedHandler(defaultAccessDeniedHandler);
         http.logout().logoutSuccessHandler(defaultLogoutSuccessHandler);
-        http.addFilter(new DefaultTokenRequestFilter(authenticationManager(), tokenService));
+        http.addFilter(new DefaultTokenRequestFilter(authenticationManager(), tokenService, userDetailService));
 //        super.configure(http);
     }
 

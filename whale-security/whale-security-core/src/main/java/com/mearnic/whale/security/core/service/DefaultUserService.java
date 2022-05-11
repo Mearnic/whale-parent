@@ -19,7 +19,7 @@ public class DefaultUserService implements UserService {
     @Override
     public LoginUser findByUsername(String username) {
         DefaultUser user = new DefaultUser();
-        user.setId(1);
+        user.setId(1L);
         user.setUsername("admin");
         user.setPassword("tiger");
         return user;

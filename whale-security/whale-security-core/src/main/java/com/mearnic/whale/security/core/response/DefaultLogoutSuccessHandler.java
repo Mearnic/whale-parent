@@ -28,9 +28,9 @@ public class DefaultLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-        String token = request.getHeader("token");
+        String token = request.getHeader("Authorization");
         String result;
-        if (request.getHeader("token") == null || token.isEmpty()) {
+        if (request.getHeader("Authorization") == null || token.isEmpty()) {
             result = objectMapper.writeValueAsString(R.ok(EStatus.LOGIN_OUT_FAIL));
         } else {
             LoginUser loginUser = tokenService.parseToken(token);
