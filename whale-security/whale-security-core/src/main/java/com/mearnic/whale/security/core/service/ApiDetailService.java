@@ -1,5 +1,7 @@
 package com.mearnic.whale.security.core.service;
 
+import com.mearnic.whale.security.core.bean.DefaultApi;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,7 @@ import java.util.List;
  */
 public interface ApiDetailService {
 
-    List<String> findAnonymity();
+    List<DefaultApi> findAnonymity();
 
     List<String> findByUri(String uri, String method, String serverName);
 }

@@ -1,5 +1,6 @@
 package com.mearnic.whale.security.core.component;
 
+import com.mearnic.whale.security.core.bean.DefaultApi;
 import com.mearnic.whale.security.core.service.ApiDetailService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.ConfigAttribute;
@@ -12,6 +13,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author yqh
@@ -32,8 +35,13 @@ public class DefaultFilterInvocationSecurityMetadataSource implements FilterInvo
         HttpServletRequest request = invocation.getRequest();
         String method = request.getMethod();
         String uri = request.getRequestURI();
-        List<String> anonymityList = apiDetailService.findAnonymity();
-        if (anonymityList.contains(uri)) {
+        List<DefaultApi> anonymityList = apiDetailService.findAnonymity();
+        Map<String, DefaultApi> apiMap = anonymityList.stream().collect(Collectors.toMap(DefaultApi::getUri, y -> y, (x, y) -> x));
+        DefaultApi defaultApi = apiMap.get(uri);
+        if (defaultApi != null
+                && defaultApi.getUri().equals(uri)
+                && defaultApi.getMethod().equals(method)
+                && defaultApi.getServiceName().equals(serverName)) {
             return null;
         } else {
             List<String> roles = apiDetailService.findByUri(uri, method, serverName);

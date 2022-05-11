@@ -1,5 +1,7 @@
 package com.mearnic.whale.security.core.service;
 
+import com.mearnic.whale.security.core.bean.DefaultApi;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,14 +13,18 @@ import java.util.List;
  */
 @Service
 public class DefaultApiDetailService implements ApiDetailService {
+
+    @Value("${spring.application.name}")
+    private  String serverName;
+
     @Override
-    public List<String> findAnonymity() {
-        ArrayList<String> urls = new ArrayList<>();
-        urls.add("/v3");
-        urls.add("/login");
-        urls.add("/oauth/authorize");
-        urls.add("/oauth/token");
-        urls.add("/favicon.ico");
+    public List<DefaultApi> findAnonymity() {
+        ArrayList<DefaultApi> urls = new ArrayList<>();
+        urls.add(new DefaultApi("/v3","GET", serverName));
+        urls.add(new DefaultApi("/login","GET", serverName));
+        urls.add(new DefaultApi("/oauth/authorize","GET", serverName));
+        urls.add(new DefaultApi("/oauth/token","GET", serverName));
+        urls.add(new DefaultApi("/favicon.ico","GET", serverName));
         return urls;
     }
 
