@@ -2,7 +2,7 @@ package com.mearnic.whale.security.core.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mearnic.whale.security.core.bean.EStatus;
-import com.mearnic.whale.security.core.bean.R;
+import com.mearnic.whale.security.core.bean.Result;
 import com.mearnic.whale.security.core.constant.PackageConstant;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -30,7 +30,7 @@ public class DefaultAuthenticationEntryPoint implements AuthenticationEntryPoint
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-        String result = objectMapper.writeValueAsString(R.ok(EStatus.OFF_LINE_EXCEPTION));
+        String result = objectMapper.writeValueAsString(Result.error(EStatus.OFF_LINE_EXCEPTION.toString()));
         response.getWriter().write(result);
     }
 }

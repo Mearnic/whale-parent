@@ -2,7 +2,7 @@ package com.mearnic.whale.security.core.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mearnic.whale.security.core.bean.EStatus;
-import com.mearnic.whale.security.core.bean.R;
+import com.mearnic.whale.security.core.bean.Result;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class DefaultAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-        String result = objectMapper.writeValueAsString(R.ok(EStatus.ROLE_EXCEPTION));
+        String result = objectMapper.writeValueAsString(Result.error(EStatus.ROLE_EXCEPTION.toString()));
         response.getWriter().write(result);
     }
 }
