@@ -37,7 +37,9 @@ public class DefaultTokenRequestFilter extends BasicAuthenticationFilter {
 
         // 获取token
         String token = request.getHeader("Authorization");
-
+        if(token==null || token.isEmpty()) {
+            token = request.getHeader("token");
+        }
         // 鉴定token是否有效
         if (token == null || token.isEmpty()) {
             super.doFilterInternal(request, response, chain);
