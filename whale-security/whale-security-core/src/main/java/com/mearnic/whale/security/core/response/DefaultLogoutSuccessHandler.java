@@ -1,6 +1,7 @@
 package com.mearnic.whale.security.core.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mearnic.whale.security.core.bean.CommonCode;
 import com.mearnic.whale.security.core.bean.EStatus;
 import com.mearnic.whale.security.core.bean.R;
 import com.mearnic.whale.security.core.bean.Result;
@@ -32,14 +33,14 @@ public class DefaultLogoutSuccessHandler implements LogoutSuccessHandler {
         String token = request.getHeader("Authorization");
         String result;
         if (request.getHeader("Authorization") == null || token.isEmpty()) {
-            result = objectMapper.writeValueAsString(Result.error(EStatus.LOGIN_OUT_FAIL.toString()));
+            result = objectMapper.writeValueAsString(Result.error(CommonCode.TOKEN_ERROR));
         } else {
             LoginUser loginUser = tokenService.parseToken(token);
             boolean isOk = tokenService.deleteToken(loginUser.getUsername());
             if (isOk) {
-                result = objectMapper.writeValueAsString(Result.error(EStatus.LOGIN_OUT_SUCCESS.toString()));
+                result = objectMapper.writeValueAsString(Result.error(CommonCode.LOGOUT_SUCCESS));
             }else{
-                result = objectMapper.writeValueAsString(Result.error(EStatus.LOGIN_OUT_FAIL.toString()));
+                result = objectMapper.writeValueAsString(Result.error(CommonCode.TOKEN_ERROR));
             }
         }
         response.getWriter().write(result);

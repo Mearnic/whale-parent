@@ -1,6 +1,7 @@
 package com.mearnic.whale.security.core.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mearnic.whale.security.core.bean.CommonCode;
 import com.mearnic.whale.security.core.bean.EStatus;
 import com.mearnic.whale.security.core.bean.Result;
 import com.mearnic.whale.security.core.constant.PackageConstant;
@@ -30,7 +31,7 @@ public class DefaultAuthenticationEntryPoint implements AuthenticationEntryPoint
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-        String result = objectMapper.writeValueAsString(Result.error(EStatus.OFF_LINE_EXCEPTION.toString()));
+        String result = objectMapper.writeValueAsString(Result.error(CommonCode.TOKEN_ERROR));
         response.getWriter().write(result);
     }
 }

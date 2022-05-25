@@ -1,6 +1,7 @@
 package com.mearnic.whale.security.core.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mearnic.whale.security.core.bean.CommonCode;
 import com.mearnic.whale.security.core.bean.EStatus;
 import com.mearnic.whale.security.core.bean.R;
 import com.mearnic.whale.security.core.bean.Result;
@@ -27,7 +28,7 @@ public class DefaultAuthenticationFailureHandler implements AuthenticationFailur
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-        String result = objectMapper.writeValueAsString(Result.error(EStatus.LOGIN_EXCEPTION.toString()));
+        String result = objectMapper.writeValueAsString(Result.error(CommonCode.LOGIN_ERROR));
         response.getWriter().write(result);
     }
 }
